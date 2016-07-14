@@ -29,7 +29,7 @@ The '&' mask is currently supported and functional. ex:  belong&0xFFFF
 - Support for '~' is uncertain. Behavior seems to match that of the 'file' command, but conflicts with docs
 
 
-## What doesn't work yet / stubbed out
+## What doesn't work yet / stubbed out / to be fixed
 ### Data types
 - date, bedate, ledate
 - qdate, beqdate, leqdate
@@ -41,6 +41,11 @@ The '&' mask is currently supported and functional. ex:  belong&0xFFFF
 - melong, medate, meldate
 - indirect, regex, search, default, clear
 
+### General code cleanup
+The code could be refined, with more attention paid to error handling. Right now there's a lot of silently ignoring problems and indicating that no match is found.  
+
+### Test coverage
+Tests are present, but do not cover all edge cases. These edge cases need to be discovered and tested. 
 
 # References
 The 'magic' command and file format:  http://linux.die.net/man/5/magic
