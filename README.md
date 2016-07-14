@@ -44,5 +44,6 @@ The '&' mask is currently supported and functional. ex:  belong&0xFFFF
 
 # References
 The 'magic' command and file format:  http://linux.die.net/man/5/magic
+
 The 'file' command:  http://linux.die.net/man/1/file
 
