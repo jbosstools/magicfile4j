@@ -17,7 +17,7 @@ package net.oxbeef.magicfile4j.test;
 
 import java.io.IOException;
 
-import net.oxbeef.magicfile4j.offset.util.StringUtils;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class PStringTest extends AbstractMagicTest {
 	

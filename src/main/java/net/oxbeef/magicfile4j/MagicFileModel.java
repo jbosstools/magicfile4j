@@ -20,9 +20,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import net.oxbeef.magicfile4j.model.internal.MagicNode;
-import net.oxbeef.magicfile4j.model.internal.NameNode;
-import net.oxbeef.magicfile4j.model.internal.TestableNode;
+import net.oxbeef.magicfile4j.internal.model.MagicNode;
+import net.oxbeef.magicfile4j.internal.model.NameNode;
+import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
 public class MagicFileModel extends MagicNode {
 	private static final int DEFAULT_DEFAULT_STRENGTH = 70;

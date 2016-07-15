@@ -17,8 +17,8 @@ package net.oxbeef.magicfile4j;
 
 import java.util.ArrayList;
 
-import net.oxbeef.magicfile4j.model.internal.Magic;
-import net.oxbeef.magicfile4j.model.internal.MagicNode;
+import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.MagicNode;
 
 public class MagicResult {
 	private MagicNode topMatchingNode;

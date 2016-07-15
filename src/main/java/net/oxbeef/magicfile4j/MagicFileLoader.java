@@ -22,14 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import net.oxbeef.magicfile4j.model.internal.Magic;
-import net.oxbeef.magicfile4j.model.internal.MagicNode;
-import net.oxbeef.magicfile4j.model.internal.NameNode;
-import net.oxbeef.magicfile4j.model.internal.NodeFactoryUtil;
-import net.oxbeef.magicfile4j.model.internal.TestableNode;
-import net.oxbeef.magicfile4j.model.internal.UseNode;
-import net.oxbeef.magicfile4j.model.internal.ext.Strength;
-import net.oxbeef.magicfile4j.offset.util.StringUtils;
+import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.MagicNode;
+import net.oxbeef.magicfile4j.internal.model.NameNode;
+import net.oxbeef.magicfile4j.internal.model.NodeFactoryUtil;
+import net.oxbeef.magicfile4j.internal.model.TestableNode;
+import net.oxbeef.magicfile4j.internal.model.UseNode;
+import net.oxbeef.magicfile4j.internal.model.ext.Strength;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class MagicFileLoader {
 

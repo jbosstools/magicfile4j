@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import net.oxbeef.magicfile4j.offset.util.StringUtils;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class NumericComparisonTest extends AbstractMagicTest {
 	

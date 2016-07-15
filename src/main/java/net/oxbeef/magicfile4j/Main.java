@@ -23,8 +23,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.oxbeef.magicfile4j.model.internal.Magic;
-import net.oxbeef.magicfile4j.offset.util.StringUtils;
+import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class Main {
 

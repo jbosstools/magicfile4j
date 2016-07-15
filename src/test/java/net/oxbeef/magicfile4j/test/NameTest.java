@@ -20,8 +20,8 @@ import java.io.IOException;
 
 import net.oxbeef.magicfile4j.MagicFileLoader;
 import net.oxbeef.magicfile4j.MagicFileModel;
-import net.oxbeef.magicfile4j.model.internal.MagicNode;
-import net.oxbeef.magicfile4j.offset.util.StringUtils;
+import net.oxbeef.magicfile4j.internal.model.MagicNode;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class NameTest extends AbstractMagicTest {
 	public void testNamedEntry() throws IOException {
