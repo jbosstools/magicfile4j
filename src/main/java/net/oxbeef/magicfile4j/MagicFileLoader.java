@@ -23,17 +23,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.MagicFileModel;
 import net.oxbeef.magicfile4j.internal.model.MagicNode;
-import net.oxbeef.magicfile4j.internal.model.NameNode;
 import net.oxbeef.magicfile4j.internal.model.NodeFactoryUtil;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
-import net.oxbeef.magicfile4j.internal.model.UseNode;
 import net.oxbeef.magicfile4j.internal.model.ext.Strength;
-import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class MagicFileLoader {
 
-	public MagicFileModel readMagicFile(InputStream io) throws IOException {
+	public IMagicFileModel readMagicFile(InputStream io) throws IOException {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(io));
@@ -49,7 +47,7 @@ public class MagicFileLoader {
 		}
 	}
 
-	public MagicFileModel readMagicFile(File f) throws IOException {
+	public IMagicFileModel readMagicFile(File f) throws IOException {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(f));
@@ -147,7 +145,7 @@ public class MagicFileLoader {
 	}
 	
 
-	public void handleBang(String line, MagicFileModel root, TestableNode last) {
+	private void handleBang(String line, MagicFileModel root, TestableNode last) {
 		if (line.startsWith("!:mime")) {
 			parseMime(line, root, last);
 		} else if (line.startsWith("!:ext")) {

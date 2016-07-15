@@ -19,7 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import net.oxbeef.magicfile4j.MagicFileLoader;
-import net.oxbeef.magicfile4j.MagicFileModel;
+import net.oxbeef.magicfile4j.internal.model.MagicFileModel;
 import net.oxbeef.magicfile4j.internal.model.MagicNode;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 

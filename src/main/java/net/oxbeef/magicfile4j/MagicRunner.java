@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 
 import net.oxbeef.magicfile4j.internal.model.DataTypeMatcherMap;
 import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.MagicFileModel;
 import net.oxbeef.magicfile4j.internal.model.MagicNode;
 import net.oxbeef.magicfile4j.internal.model.NameNode;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;

@@ -24,6 +24,9 @@ public class MagicResult {
 	private MagicNode topMatchingNode;
 	private ArrayList<MagicNode> allMatching;
 	StringBuffer fullDescription;
+	private int mimeLevel = -1;
+	private String mime = null;
+
 	public MagicResult(MagicNode m) {
 		topMatchingNode = m;
 		allMatching = new ArrayList<MagicNode>();
@@ -43,8 +46,6 @@ public class MagicResult {
 		return fullDescription.toString();
 	}
 	
-	private int mimeLevel = -1;
-	private String mime = null;
 	public void addMatchedMimeType(int level, String mime) {
 		if( level > mimeLevel ) {
 			mimeLevel = level;

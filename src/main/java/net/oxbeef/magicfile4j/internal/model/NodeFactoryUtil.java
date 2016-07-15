@@ -15,7 +15,6 @@
  */
 package net.oxbeef.magicfile4j.internal.model;
 
-import net.oxbeef.magicfile4j.MagicFileModel;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class NodeFactoryUtil {

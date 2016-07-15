@@ -20,9 +20,9 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 import net.oxbeef.magicfile4j.MagicFileLoader;
-import net.oxbeef.magicfile4j.MagicFileModel;
 import net.oxbeef.magicfile4j.MagicResult;
 import net.oxbeef.magicfile4j.MagicRunner;
+import net.oxbeef.magicfile4j.internal.model.MagicFileModel;
 
 public abstract class AbstractMagicTest extends TestCase {
 

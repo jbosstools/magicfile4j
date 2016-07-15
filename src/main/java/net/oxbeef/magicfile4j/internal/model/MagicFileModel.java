@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.oxbeef.magicfile4j;
+package net.oxbeef.magicfile4j.internal.model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import net.oxbeef.magicfile4j.internal.model.MagicNode;
-import net.oxbeef.magicfile4j.internal.model.NameNode;
-import net.oxbeef.magicfile4j.internal.model.TestableNode;
+import net.oxbeef.magicfile4j.IMagicFileModel;
 
-public class MagicFileModel extends MagicNode {
+public class MagicFileModel extends MagicNode implements IMagicFileModel {
 	private static final int DEFAULT_DEFAULT_STRENGTH = 70;
 	private int defaultStrength;
 	private HashMap<String, MagicNode> namedNodes;

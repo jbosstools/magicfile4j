@@ -18,8 +18,6 @@ package net.oxbeef.magicfile4j.internal.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.oxbeef.magicfile4j.MagicFileModel;
-
 public class MagicNode {
 	protected ArrayList<MagicNode> children;
 	protected MagicNode parent;

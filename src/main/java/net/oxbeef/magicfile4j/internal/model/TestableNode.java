@@ -17,7 +17,6 @@ package net.oxbeef.magicfile4j.internal.model;
 
 import java.util.HashMap;
 
-import net.oxbeef.magicfile4j.MagicFileModel;
 import net.oxbeef.magicfile4j.internal.model.ext.Strength;
 import net.oxbeef.magicfile4j.internal.offset.OffsetResolver;
 
