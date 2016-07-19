@@ -15,18 +15,22 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import java.nio.ByteOrder;
+
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class qdateTest extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
+/**
+ * A four-byte integer value where the high bit of each byte is ignored.
+ */
+public class id3Test extends NumericTest {
+	public id3Test(ByteOrder order) {
+		super(4, order);
 	}
 	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
-	}
-	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
+		byte[] found = super.getValue(magic, bytearray);
+		for( int i = 0; i < found.length; i++ ) {
+			found[i] = (byte)(found[i] & 0x7F);
+		}
+		return found;
 	}
 }

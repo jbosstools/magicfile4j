@@ -15,6 +15,7 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
 public class searchTest extends Tester {
@@ -29,4 +30,10 @@ public class searchTest extends Tester {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public String formatString(Magic m, String out, byte[] val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

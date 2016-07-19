@@ -15,6 +15,7 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
 public class melongTest extends Tester {
@@ -28,5 +29,9 @@ public class melongTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public String formatString(Magic m, String out, byte[] val) {
+		return out;
 	}
 }

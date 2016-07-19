@@ -26,7 +26,7 @@ import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 public class NameTest extends AbstractMagicTest {
 	public void testNamedEntry() throws IOException {
 		String magicFile = "0 name mynamedentry";
-		MagicFileModel mfm = new MagicFileLoader().readMagicFile(
+		MagicFileModel mfm = (MagicFileModel) new MagicFileLoader().readMagicFile(
 				new ByteArrayInputStream(magicFile.getBytes()));
 		MagicNode mn = mfm.getNamedNode("mynamedentry");
 		assertNotNull(mn);

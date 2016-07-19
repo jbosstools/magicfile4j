@@ -36,13 +36,15 @@ public class MagicRunner {
 		this.contents = contents;
 	}
 	
-	public MagicResult runMatcher(MagicFileModel model) {
+	public MagicResult runMatcher(IMagicFileModel model2) {
+		MagicFileModel model = (MagicFileModel)model2;
 		// should sort top level nodes, but not during testing
-		MagicNode[] magics = model.getChildren(); // model.getSortedChildren(); 
+		MagicNode[] magics = model.getSortedChildren(); 
 												
 		for (int i = 0; i < magics.length; i++) {
 			MagicNode m = magics[i];
 			// If we're a named node, we shouldn't be eligible as a top-level result???
+			// This is when comparing my results to those of linux 'file' 
 			if( !(m instanceof NameNode)) {
 				MagicNode matched = findFirstMatchingDescriptionNode(m);
 				if (matched != null) {
@@ -132,7 +134,7 @@ public class MagicRunner {
 			if( node.hasOutput()) {
 				String out = ((Magic)node).getOutput();
 				if( out != null && !out.isEmpty()) {
-					String toPrint = formatString((Magic)node, out, result);
+					String toPrint = tester.formatString((Magic)node, out, result);
 					if( toPrint.startsWith("\\b")) {
 						toPrint = toPrint.substring(2);
 					} else {

@@ -15,18 +15,8 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
-import net.oxbeef.magicfile4j.internal.model.TestableNode;
-
-public class leid3Test extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
-	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
-	}
-	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
+public class leid3Test extends bestring16Test {
+	protected char toChar(int f, int s) {
+		return (char) (s << 8 + f);
 	}
 }

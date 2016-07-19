@@ -39,6 +39,11 @@ public class stringTest extends Tester {
 		if( "x".equals(test)) {
 			return true;
 		}
+		
+		return compare(test, dataAtOffset);
+	}
+	
+	protected boolean compare(String test, byte[] dataAtOffset) {
 		char[] t2 = StringUtils.getEscapedCharacterArray(test, false);
 		if( t2.length == dataAtOffset.length) {
 			for( int i = 0; i < t2.length; i++ ) {
@@ -49,5 +54,10 @@ public class stringTest extends Tester {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public String formatString(Magic m, String out, byte[] val) {
+		String s = new String(val);
+		return String.format(out, s);
 	}
 }

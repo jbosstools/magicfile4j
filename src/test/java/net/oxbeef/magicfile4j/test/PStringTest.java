@@ -16,6 +16,9 @@
 package net.oxbeef.magicfile4j.test;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
@@ -110,5 +113,6 @@ public class PStringTest extends AbstractMagicTest {
 		toTest = StringUtils.combine(new byte[][]{objpart, str});
 		runMagicAndFileTestOpNullMatch(magicFile, toTest);
 	}
+
 
 }

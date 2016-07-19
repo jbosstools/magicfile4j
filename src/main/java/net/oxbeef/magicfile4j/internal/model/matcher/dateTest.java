@@ -15,18 +15,46 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class dateTest extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
+public class dateTest extends NumericTest {
+	
+	public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
+	
+	private TimeZone zone;
+	public dateTest(int size, ByteOrder order, TimeZone zone) {
+		super(size, order);
+		this.zone = zone;
+	}
+
+	protected boolean isSigned(TestableNode magic) {
 		return false;
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
-	}
+	
 	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
+	public String formatString(Magic m, String out, byte[] val) {
+		ByteBuffer bb = ByteBuffer.wrap(val);
+		long l = -1;
+		switch(size) {
+		case 4:
+			l = bb.getInt();
+			break;
+		case 8:
+			l = bb.getLong();
+			break;
+		}
+		Date date = new Date(l);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+		if( zone != null )
+			format.setTimeZone(zone);
+		String asStr = format.format(date);
+		return String.format(out, asStr);
 	}
 }

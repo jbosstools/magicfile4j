@@ -15,6 +15,7 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
 public abstract class Tester {
@@ -29,20 +30,15 @@ public abstract class Tester {
 
 	
 	/**
-	 * Return whether this matcher agrees that the given magic entry
-	 * matches for the byte array
-	 * 
-	 * @param magic
-	 * @param bytearray
+	 * Format the output string with the found bytes
+	 * @param m
+	 * @param out
+	 * @param val
 	 * @return
 	 */
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		byte[] dataAtOffset = getValue(magic, bytearray);
-		if( dataAtOffset != null ) {
-			return matches(magic, bytearray, dataAtOffset);
-		}
-		return false;
-	}	
+	public abstract String formatString(Magic m, String out, byte[] val);
+
+	
 	/**
 	 * 
 	 * Return whether this matcher agrees that the given magic entry

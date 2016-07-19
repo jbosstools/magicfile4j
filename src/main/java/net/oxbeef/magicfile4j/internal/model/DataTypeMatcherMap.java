@@ -20,11 +20,7 @@ import java.util.HashMap;
 
 import net.oxbeef.magicfile4j.internal.model.matcher.NumericTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.Tester;
-import net.oxbeef.magicfile4j.internal.model.matcher.bedateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.beid3Test;
-import net.oxbeef.magicfile4j.internal.model.matcher.beldateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.beqdateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.beqldateTest;
+import net.oxbeef.magicfile4j.internal.model.matcher.id3Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.beqwdateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.bestring16Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.byteTest;
@@ -34,12 +30,7 @@ import net.oxbeef.magicfile4j.internal.model.matcher.defaultTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.doubleTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.floatTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.indirectTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.ldateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.ledateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.leid3Test;
-import net.oxbeef.magicfile4j.internal.model.matcher.leldateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.leqdateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.leqldateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.leqwdateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.lestring16Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.medateTest;
@@ -47,8 +38,6 @@ import net.oxbeef.magicfile4j.internal.model.matcher.meldateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.melongTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.nameTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.pstringTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.qdateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.qldateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.quadTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.qwdateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.regexTest;
@@ -118,62 +107,63 @@ public class DataTypeMatcherMap implements IDataTypes {
 		
 		byteTester = new byteTest();
 		
-		shortTester = new shortTest(ByteOrder.BIG_ENDIAN);
+		shortTester = new shortTest(ByteOrder.nativeOrder());
 		beshortTester = new shortTest(ByteOrder.BIG_ENDIAN);
 		leshortTester = new shortTest(ByteOrder.LITTLE_ENDIAN);
 
-		floatTester = new floatTest();
+		floatTester = new floatTest(ByteOrder.nativeOrder());
 		befloatTester = new floatTest(ByteOrder.BIG_ENDIAN);
 		lefloatTester = new floatTest(ByteOrder.LITTLE_ENDIAN);
 		
-		longTester = new NumericTest(4, ByteOrder.BIG_ENDIAN);
+		longTester = new NumericTest(4, ByteOrder.nativeOrder());
 		belongTester = new NumericTest(4, ByteOrder.BIG_ENDIAN);
 		lelongTester = new NumericTest(4, ByteOrder.LITTLE_ENDIAN);
 
-		doubleTester = new doubleTest(ByteOrder.BIG_ENDIAN);
+		doubleTester = new doubleTest(ByteOrder.nativeOrder());
 		bedoubleTester = new doubleTest(ByteOrder.BIG_ENDIAN);
 		ledoubleTester = new doubleTest(ByteOrder.LITTLE_ENDIAN);
 
 		stringTester = new stringTest(); // partially complete, doesn't support flags
 		pstringTester = new pstringTest();
 
-		quadTester = new quadTest();
+		quadTester = new quadTest(ByteOrder.nativeOrder());
 		bequadTester = new quadTest(ByteOrder.BIG_ENDIAN);
 		lequadTester = new quadTest(ByteOrder.LITTLE_ENDIAN);
 		
 		
-		nameTester = new nameTest(); // Done
+		nameTester = new nameTest();
 		useTester = new useTest();
 		
 		// Not yet done
 				
 		
-		dateTester = new dateTest();
-		bedateTester = new bedateTest();
-		ledateTester = new ledateTest();
+		dateTester = new dateTest(4, ByteOrder.nativeOrder(), null);
+		bedateTester = new dateTest(4, ByteOrder.BIG_ENDIAN, null);
+		ledateTester = new dateTest(4, ByteOrder.LITTLE_ENDIAN, null);
 		
-		qdateTester = new qdateTest();
-		beqdateTester = new beqdateTest();
-		leqdateTester = new leqdateTest();
+		qdateTester = new dateTest(8, ByteOrder.nativeOrder(), null);
+		beqdateTester = new dateTest(8, ByteOrder.BIG_ENDIAN, null);
+		leqdateTester = new dateTest(8, ByteOrder.LITTLE_ENDIAN, null);
 		
-		ldateTester = new ldateTest();
-		beldateTester = new beldateTest();
-		leldateTester = new leldateTest();
+		ldateTester = new dateTest(4, ByteOrder.nativeOrder(), dateTest.UTC_TIME_ZONE);
+		beldateTester = new dateTest(4, ByteOrder.BIG_ENDIAN, dateTest.UTC_TIME_ZONE);
+		leldateTester = new dateTest(4, ByteOrder.LITTLE_ENDIAN, dateTest.UTC_TIME_ZONE);
 		
-		qldateTester = new qldateTest();
-		beqldateTester = new beqldateTest();
-		leqldateTester = new leqldateTest();
+		qldateTester = new dateTest(8, ByteOrder.nativeOrder(),dateTest.UTC_TIME_ZONE);
+		beqldateTester = new dateTest(8, ByteOrder.BIG_ENDIAN,dateTest.UTC_TIME_ZONE);
+		leqldateTester = new dateTest(8, ByteOrder.LITTLE_ENDIAN,dateTest.UTC_TIME_ZONE);
+		
+		leid3Tester = new id3Test(ByteOrder.LITTLE_ENDIAN);
+		beid3Tester = new id3Test(ByteOrder.BIG_ENDIAN);
+		
+		bestring16Tester = new bestring16Test();
+		lestring16Tester = new lestring16Test();
+		
 		
 		qwdateTester = new qwdateTest();
 		beqwdateTester = new beqwdateTest();
 		leqwdateTester = new leqwdateTest();
 
-		leid3Tester = new leid3Test();
-		beid3Tester = new beid3Test();
-		
-		bestring16Tester = new bestring16Test();
-		lestring16Tester = new lestring16Test();
-		
 		melongTester = new melongTest();
 		medateTester = new medateTest();
 		meldateTester = new meldateTest();

@@ -15,6 +15,7 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import net.oxbeef.magicfile4j.internal.model.Magic;
@@ -154,10 +155,14 @@ public class NumericTest extends Tester {
 				op = '=';
 			}
 			
-			boolean signed = !magic.getType().startsWith("u");
+			boolean signed = isSigned(magic);
 			return matches(test, dataAtOffset, signed, op);
 		}
 		return false;
+	}
+	
+	protected boolean isSigned(TestableNode magic) {
+		return !magic.getType().startsWith("u");
 	}
 	
 	
@@ -189,5 +194,20 @@ public class NumericTest extends Tester {
 			ret |= (0xFF << (i*8));
 		}
 		return ret;
+	}
+	
+	public String formatString(Magic m, String out, byte[] val) {
+		ByteBuffer bb = ByteBuffer.wrap(val);
+		switch(val.length) {
+		case 1:
+			return String.format(out, bb.get());
+		case 2:
+			return String.format(out,  bb.getShort());
+		case 4: 
+			return String.format(out,  bb.getInt());
+		case 8: 
+			return String.format(out, bb.getDouble());
+		}
+		return out;
 	}
 }

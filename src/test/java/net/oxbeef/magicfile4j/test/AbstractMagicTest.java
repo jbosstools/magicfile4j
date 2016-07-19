@@ -19,17 +19,17 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import junit.framework.TestCase;
+import net.oxbeef.magicfile4j.IMagicFileModel;
 import net.oxbeef.magicfile4j.MagicFileLoader;
 import net.oxbeef.magicfile4j.MagicResult;
 import net.oxbeef.magicfile4j.MagicRunner;
-import net.oxbeef.magicfile4j.internal.model.MagicFileModel;
 
 public abstract class AbstractMagicTest extends TestCase {
 
 	protected void runMagicAndFileTestOp(
 			String magicFileContents, byte[] fileToTest,
 			String expectedResult) throws IOException {
-		MagicFileModel mfm = new MagicFileLoader().readMagicFile(
+		IMagicFileModel mfm = new MagicFileLoader().readMagicFile(
 				new ByteArrayInputStream(magicFileContents.getBytes()));
 		MagicRunner mrunner = null;
 		mrunner = new MagicRunner("Test", fileToTest);
@@ -40,12 +40,11 @@ public abstract class AbstractMagicTest extends TestCase {
 	
 	protected void runMagicAndFileTestOpNullMatch(
 			String magicFileContents, byte[] fileToTest) throws IOException {
-		MagicFileModel mfm = new MagicFileLoader().readMagicFile(
+		IMagicFileModel mfm = new MagicFileLoader().readMagicFile(
 				new ByteArrayInputStream(magicFileContents.getBytes()));
 		MagicRunner mrunner = null;
 		mrunner = new MagicRunner("Test", fileToTest);
 		MagicResult mr = mrunner.runMatcher(mfm);
 		assertNull(mr);
 	}
-
 }

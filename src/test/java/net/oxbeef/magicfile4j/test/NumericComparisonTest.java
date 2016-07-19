@@ -134,7 +134,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	 */
 	
 	public void testANDComparisonShort() throws IOException {
-		String magicFile = "0 short &0xFF match";
+		String magicFile = "0 beshort &0xFF match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -144,7 +144,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	
 
 	public void testXORComparisonShort() throws IOException {
-		String magicFile = "0 short ^0x24 match";
+		String magicFile = "0 beshort ^0x24 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFCA");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -153,7 +153,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 	
 	public void testNegateComparisonShort() throws IOException {
-		String magicFile = "0 short ~3 match";
+		String magicFile = "0 beshort ~3 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFC");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -162,7 +162,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 
 	public void testShortWithMask() throws IOException {
-		String magicFile = "0 short&0xF >7 match";
+		String magicFile = "0 beshort&0xF >7 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -190,7 +190,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 
 	// short unsigned
 	public void testUnsignedShortGT() throws IOException {
-		String magicFile = "0 ushort >0xF000 match";
+		String magicFile = "0 ubeshort >0xF000 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 
@@ -215,7 +215,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 
 	public void testSignedShortGT() throws IOException {
-		String magicFile = "0 short >0xF000 match";
+		String magicFile = "0 beshort >0xF000 match";
 		
 		// higher always
 		byte[] objpart = StringUtils.hex2Bytes("F001");
@@ -250,7 +250,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 
 	// short unsigned
 	public void testUnsignedLongGT() throws IOException {
-		String magicFile = "0 ulong >0xF0000000 match";
+		String magicFile = "0 ubelong >0xF0000000 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFFFFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 
@@ -275,7 +275,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 
 	public void testSignedLongGT() throws IOException {
-		String magicFile = "0 long >0xF0000000 match";
+		String magicFile = "0 belong >0xF0000000 match";
 		
 		// higher always
 		byte[] objpart = StringUtils.hex2Bytes("F0000001");
@@ -338,7 +338,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}	
 
 	public void testNotEqualComparisonQuad() throws IOException {
-		String magicFile = "0 quad !0 match";
+		String magicFile = "0 bequad !0 match";
 		byte[] objpart = StringUtils.hex2Bytes("FFFFFFFFFFFFFFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -347,7 +347,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 
 	public void testGTComparisonQuad() throws IOException {
-		String magicFile = "0 quad >0x7FFFFFFFFFFF0000 match";
+		String magicFile = "0 bequad >0x7FFFFFFFFFFF0000 match";
 		byte[] objpart = StringUtils.hex2Bytes("7FFFFFFFFFFFFFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		
@@ -356,7 +356,7 @@ public class NumericComparisonTest extends AbstractMagicTest {
 	}
 
 	public void testGTComparisonUnsignedQuad() throws IOException {
-		String magicFile = "0 uquad >0x7FFFFFFFFFFF0000 match";
+		String magicFile = "0 ubequad >0x7FFFFFFFFFFF0000 match";
 		byte[] objpart = StringUtils.hex2Bytes("7FFFFFFFFFFFFFFF");
 		runMagicAndFileTestOp(magicFile, objpart, "Test: match");
 		

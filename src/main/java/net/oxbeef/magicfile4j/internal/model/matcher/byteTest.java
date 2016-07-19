@@ -15,7 +15,10 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+
+import net.oxbeef.magicfile4j.internal.model.Magic;
 
 public class byteTest extends NumericTest {
 	public byteTest() {
@@ -26,6 +29,11 @@ public class byteTest extends NumericTest {
 			return super.compare(l, l2, signed);
 		}
 		return (long)((byte)l - (byte)l2);
+	}
+	@Override
+	public String formatString(Magic m, String out, byte[] val) {
+		ByteBuffer bb = ByteBuffer.wrap(val);
+		return String.format(out, bb.get());
 	}
 
 }
