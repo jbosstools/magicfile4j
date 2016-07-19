@@ -38,7 +38,7 @@ public class InvertedTest extends TestCase implements IDataTypes {
 			MAGIC_NAME,	MAGIC_USE,	MAGIC_REGEX,	MAGIC_SEARCH,	MAGIC_DEFAULT,	MAGIC_CLEAR
 	};
 	
-	// when the native is big-endian, these are the opposites
+	// when the native is little-endian, these are the opposites
 	public static final String[] invertedNativeLittle = new String[] {
 			MAGIC_BYTE,		MAGIC_BESHORT,	MAGIC_BELONG, 	MAGIC_BEQUAD,	MAGIC_BEFLOAT,
 			MAGIC_BEDOUBLE,	MAGIC_STRING,	MAGIC_PSTRING,	MAGIC_BEDATE,	
