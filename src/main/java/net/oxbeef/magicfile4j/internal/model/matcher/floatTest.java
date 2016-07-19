@@ -16,17 +16,13 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 
 public class floatTest extends NumericTest {
 
-	public floatTest() {
-		super(8, ByteOrder.BIG_ENDIAN);
-	}
-	
-	public floatTest(ByteOrder endian) {
+	public floatTest(Endian endian) {
 		super(8, endian);
 	}
 

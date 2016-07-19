@@ -15,14 +15,10 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
-import java.nio.ByteOrder;
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 
 public class shortTest extends NumericTest {
-	public shortTest(){
-		super(2, ByteOrder.BIG_ENDIAN);
-	}
-
-	public shortTest(ByteOrder endian){
+	public shortTest(Endian endian){
 		super(2, endian);
 	}
 

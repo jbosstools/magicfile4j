@@ -18,15 +18,12 @@ package net.oxbeef.magicfile4j.internal.model.matcher;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 
 public class doubleTest extends NumericTest {
 
-	public doubleTest() {
-		super(8, ByteOrder.BIG_ENDIAN);
-	}
-	
-	public doubleTest(ByteOrder endian) {
+	public doubleTest(Endian endian) {
 		super(8, endian);
 	}
 

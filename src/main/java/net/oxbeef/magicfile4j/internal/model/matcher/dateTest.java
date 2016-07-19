@@ -16,11 +16,11 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
@@ -29,8 +29,8 @@ public class dateTest extends NumericTest {
 	public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
 	
 	private TimeZone zone;
-	public dateTest(int size, ByteOrder order, TimeZone zone) {
-		super(size, order);
+	public dateTest(int size, Endian endian, TimeZone zone) {
+		super(size, endian);
 		this.zone = zone;
 	}
 

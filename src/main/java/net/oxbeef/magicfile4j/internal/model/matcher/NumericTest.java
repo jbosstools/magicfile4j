@@ -16,18 +16,19 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
+import net.oxbeef.magicfile4j.internal.endian.EndianReader;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class NumericTest extends Tester {
 	protected int size;
-	protected ByteOrder byteOrder;
-	public NumericTest(int size, ByteOrder order) {
+	protected  EndianReader reader;
+	public NumericTest(int size, Endian e) {
 		this.size = size;
-		this.byteOrder = order;
+		this.reader = e.getConverter() ;
 	}
 
 	protected boolean matches(String test, byte[] dataAtOffset, boolean signed, char op) {
@@ -101,36 +102,36 @@ public class NumericTest extends Tester {
 		byte[] ret = new byte[size];
 		System.arraycopy(ba, o, ret, 0, size);
 		
-		// If it's little-endian, reverse it to big-endian
-		if( byteOrder == ByteOrder.LITTLE_ENDIAN) {
-			for (int i = 0; i < ret.length / 2; i++) {
-				  byte temp = ret[i];
-				  ret[i] = ret[ret.length - 1 - i];
-				  ret[ret.length - 1 - i] = temp;
-			}
-		}
+		ret = convertToBigEndian(ret);
 		
-		// Find the mask
-		String type = magic.getType();
-		int ampInd = type.indexOf('&');
-		if( ampInd != -1 ) {
-			String mask1 = type.substring(ampInd+1);
-			byte[] mask2 = StringUtils.numericStringToBytes(mask1);
-			int sizeBytes = ret.length;
-			int maskLength = mask2.length;
-			int diff = sizeBytes-maskLength;
-			for( int i = 0; i < sizeBytes; i++ ) {
-				if( i >= diff) {
-					ret[i] = (byte)(ret[i] & mask2[i-diff]);
-				} else {
-					ret[i] = 0;
+		if( ret != null ) {
+			// Find the mask
+			String type = magic.getType();
+			int ampInd = type.indexOf('&');
+			if( ampInd != -1 ) {
+				String mask1 = type.substring(ampInd+1);
+				byte[] mask2 = StringUtils.numericStringToBytes(mask1);
+				int sizeBytes = ret.length;
+				int maskLength = mask2.length;
+				int diff = sizeBytes-maskLength;
+				for( int i = 0; i < sizeBytes; i++ ) {
+					if( i >= diff) {
+						ret[i] = (byte)(ret[i] & mask2[i-diff]);
+					} else {
+						ret[i] = 0;
+					}
 				}
 			}
 		}
 		
-		
 		return ret;
 	}
+	
+	protected byte[] convertToBigEndian(byte[] raw) {
+		// If it's little-endian, reverse it to big-endian
+		return reader.convertToBigEndian(raw);
+	}
+	
 	
 	@Override
 	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {

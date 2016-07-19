@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.oxbeef.magicfile4j.internal.model.matcher;
+package net.oxbeef.magicfile4j.internal.endian;
 
-public class leid3Test extends bestring16Test {
-	protected char toChar(int f, int s) {
-		return (char) (s << 8 + f);
+public class BigEndianReader implements EndianReader {
+	public byte[] convertToBigEndian(byte[] raw) {
+		return raw;
 	}
 }

@@ -15,6 +15,7 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
@@ -23,7 +24,13 @@ import net.oxbeef.magicfile4j.internal.offset.StringUtils;
  * A two byte string in unicode  - UCS16  
  * We'll return the data raw,  and let our matches method reverse it
  */
-public class bestring16Test extends stringTest {
+public class string16Test extends stringTest {
+	private Endian endian;
+	public string16Test(Endian endian) {
+		this.endian = endian;
+	}
+	
+	
 	public byte[] getValue(TestableNode magic, byte[] bytearray) {
 		int o = magic.resolveOffset(bytearray);
 		int len = getLength(o, bytearray);
@@ -43,7 +50,8 @@ public class bestring16Test extends stringTest {
 	}
 	
 	protected char toChar(int f, int s) {
-		return (char) (f << 8 + s);
+		return endian == Endian.BIG ? 
+					(char) (f << 8 + s) : (char) (s << 8 + f); 
 	}
 	
 	protected boolean compare(String test, byte[] dataAtOffset) {

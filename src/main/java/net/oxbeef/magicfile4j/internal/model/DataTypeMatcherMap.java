@@ -18,24 +18,19 @@ package net.oxbeef.magicfile4j.internal.model;
 import java.nio.ByteOrder;
 import java.util.HashMap;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.matcher.NumericTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.Tester;
-import net.oxbeef.magicfile4j.internal.model.matcher.id3Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.beqwdateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.bestring16Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.byteTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.clearTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.dateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.defaultTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.doubleTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.floatTest;
+import net.oxbeef.magicfile4j.internal.model.matcher.id3Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.indirectTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.leid3Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.leqwdateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.lestring16Test;
-import net.oxbeef.magicfile4j.internal.model.matcher.medateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.meldateTest;
-import net.oxbeef.magicfile4j.internal.model.matcher.melongTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.nameTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.pstringTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.quadTest;
@@ -43,6 +38,7 @@ import net.oxbeef.magicfile4j.internal.model.matcher.qwdateTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.regexTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.searchTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.shortTest;
+import net.oxbeef.magicfile4j.internal.model.matcher.string16Test;
 import net.oxbeef.magicfile4j.internal.model.matcher.stringTest;
 import net.oxbeef.magicfile4j.internal.model.matcher.useTest;
 
@@ -107,72 +103,74 @@ public class DataTypeMatcherMap implements IDataTypes {
 		
 		byteTester = new byteTest();
 		
-		shortTester = new shortTest(ByteOrder.nativeOrder());
-		beshortTester = new shortTest(ByteOrder.BIG_ENDIAN);
-		leshortTester = new shortTest(ByteOrder.LITTLE_ENDIAN);
+		shortTester = new shortTest(Endian.NATIVE);
+		beshortTester = new shortTest(Endian.BIG);
+		leshortTester = new shortTest(Endian.LITTLE);
 
-		floatTester = new floatTest(ByteOrder.nativeOrder());
-		befloatTester = new floatTest(ByteOrder.BIG_ENDIAN);
-		lefloatTester = new floatTest(ByteOrder.LITTLE_ENDIAN);
+		floatTester = new floatTest(Endian.NATIVE);
+		befloatTester = new floatTest(Endian.BIG);
+		lefloatTester = new floatTest(Endian.LITTLE);
 		
-		longTester = new NumericTest(4, ByteOrder.nativeOrder());
-		belongTester = new NumericTest(4, ByteOrder.BIG_ENDIAN);
-		lelongTester = new NumericTest(4, ByteOrder.LITTLE_ENDIAN);
+		longTester = new NumericTest(4, Endian.NATIVE);
+		belongTester = new NumericTest(4, Endian.BIG);
+		lelongTester = new NumericTest(4, Endian.LITTLE);
 
-		doubleTester = new doubleTest(ByteOrder.nativeOrder());
-		bedoubleTester = new doubleTest(ByteOrder.BIG_ENDIAN);
-		ledoubleTester = new doubleTest(ByteOrder.LITTLE_ENDIAN);
+		doubleTester = new doubleTest(Endian.NATIVE);
+		bedoubleTester = new doubleTest(Endian.BIG);
+		ledoubleTester = new doubleTest(Endian.LITTLE);
 
 		stringTester = new stringTest(); // partially complete, doesn't support flags
 		pstringTester = new pstringTest();
 
-		quadTester = new quadTest(ByteOrder.nativeOrder());
-		bequadTester = new quadTest(ByteOrder.BIG_ENDIAN);
-		lequadTester = new quadTest(ByteOrder.LITTLE_ENDIAN);
+		quadTester = new quadTest(Endian.NATIVE);
+		bequadTester = new quadTest(Endian.BIG);
+		lequadTester = new quadTest(Endian.LITTLE);
 		
 		
 		nameTester = new nameTest();
 		useTester = new useTest();
 		
-		// Not yet done
-				
+		dateTester = new dateTest(4, Endian.NATIVE, null);
+		bedateTester = new dateTest(4, Endian.BIG, null);
+		ledateTester = new dateTest(4, Endian.LITTLE, null);
 		
-		dateTester = new dateTest(4, ByteOrder.nativeOrder(), null);
-		bedateTester = new dateTest(4, ByteOrder.BIG_ENDIAN, null);
-		ledateTester = new dateTest(4, ByteOrder.LITTLE_ENDIAN, null);
+		qdateTester = new dateTest(8, Endian.NATIVE, null);
+		beqdateTester = new dateTest(8, Endian.BIG, null);
+		leqdateTester = new dateTest(8, Endian.LITTLE, null);
 		
-		qdateTester = new dateTest(8, ByteOrder.nativeOrder(), null);
-		beqdateTester = new dateTest(8, ByteOrder.BIG_ENDIAN, null);
-		leqdateTester = new dateTest(8, ByteOrder.LITTLE_ENDIAN, null);
+		ldateTester = new dateTest(4, Endian.NATIVE, dateTest.UTC_TIME_ZONE);
+		beldateTester = new dateTest(4, Endian.BIG, dateTest.UTC_TIME_ZONE);
+		leldateTester = new dateTest(4, Endian.LITTLE, dateTest.UTC_TIME_ZONE);
 		
-		ldateTester = new dateTest(4, ByteOrder.nativeOrder(), dateTest.UTC_TIME_ZONE);
-		beldateTester = new dateTest(4, ByteOrder.BIG_ENDIAN, dateTest.UTC_TIME_ZONE);
-		leldateTester = new dateTest(4, ByteOrder.LITTLE_ENDIAN, dateTest.UTC_TIME_ZONE);
+		qldateTester = new dateTest(8, Endian.NATIVE,dateTest.UTC_TIME_ZONE);
+		beqldateTester = new dateTest(8, Endian.BIG,dateTest.UTC_TIME_ZONE);
+		leqldateTester = new dateTest(8, Endian.LITTLE,dateTest.UTC_TIME_ZONE);
 		
-		qldateTester = new dateTest(8, ByteOrder.nativeOrder(),dateTest.UTC_TIME_ZONE);
-		beqldateTester = new dateTest(8, ByteOrder.BIG_ENDIAN,dateTest.UTC_TIME_ZONE);
-		leqldateTester = new dateTest(8, ByteOrder.LITTLE_ENDIAN,dateTest.UTC_TIME_ZONE);
+		leid3Tester = new id3Test(Endian.LITTLE);
+		beid3Tester = new id3Test(Endian.BIG);
 		
-		leid3Tester = new id3Test(ByteOrder.LITTLE_ENDIAN);
-		beid3Tester = new id3Test(ByteOrder.BIG_ENDIAN);
+		bestring16Tester = new string16Test(Endian.BIG);
+		lestring16Tester = new string16Test(Endian.LITTLE);
 		
-		bestring16Tester = new bestring16Test();
-		lestring16Tester = new lestring16Test();
+		melongTester = new NumericTest(4, Endian.MIDDLE);
+		medateTester = new dateTest(4, Endian.MIDDLE, null);
+		meldateTester = new dateTest(4, Endian.MIDDLE, dateTest.UTC_TIME_ZONE);
+
+		
+		// next to do 
+		regexTester = new regexTest();
+		searchTester = new searchTest();
+
 		
 		
+		// Not yet done, no idea wtf this is
 		qwdateTester = new qwdateTest();
 		beqwdateTester = new beqwdateTest();
 		leqwdateTester = new leqwdateTest();
 
-		melongTester = new melongTest();
-		medateTester = new medateTest();
-		meldateTester = new meldateTest();
-
 
 		// Different types requiring special behavior
 		indirectTester = new indirectTest();
-		regexTester = new regexTest();
-		searchTester = new searchTest();
 		defaultTester = new defaultTest(); 
 		clearTester = new clearTest();
 
@@ -252,9 +250,16 @@ public class DataTypeMatcherMap implements IDataTypes {
 		}
 		if( t.startsWith("le")) {
 			return "be" + t.substring(2);
-		} else {
-			return "le" + t;
+		} else if( !t.startsWith("me")){
+			// we're inverting a  'long'  or 'short' or 'byte' type
+			ByteOrder nativebo = ByteOrder.nativeOrder();
+			if( nativebo == ByteOrder.BIG_ENDIAN) {
+				return "le" + t;
+			} else {
+				return "be" + t;
+			}
 		}
+		return t;
 	}
 	
 	public Tester getTester(String type) {

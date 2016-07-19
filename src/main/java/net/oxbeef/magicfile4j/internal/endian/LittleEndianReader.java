@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.oxbeef.magicfile4j.internal.model.matcher;
+package net.oxbeef.magicfile4j.internal.endian;
 
-import net.oxbeef.magicfile4j.internal.model.Magic;
-import net.oxbeef.magicfile4j.internal.model.TestableNode;
+public class LittleEndianReader implements EndianReader {
 
-public class lestring16Test extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
+	public byte[] convertToBigEndian(byte[] raw) {
+		for (int i = 0; i < raw.length / 2; i++) {
+			  byte temp = raw[i];
+			  raw[i] = raw[raw.length - 1 - i];
+			  raw[raw.length - 1 - i] = temp;
+		}
+		return raw;
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
-	}
-	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public String formatString(Magic m, String out, byte[] val) {
-		return out;
-	}
+
 }
