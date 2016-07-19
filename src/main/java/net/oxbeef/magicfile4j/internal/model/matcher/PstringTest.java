@@ -17,7 +17,9 @@ package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteOrder;
 
+import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
+import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class PstringTest extends StringTest {
 	
@@ -71,7 +73,31 @@ public class PstringTest extends StringTest {
 		}
 		return null;
 	}
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
+		String test = ((Magic)magic).getTest();
+		if(dataAtOffset == null || test == null || test.isEmpty()) {
+			return false; // this should never happen
+		}
+		if( "x".equals(test)) {
+			// TODO need to get the actual output here
+			// read until null?
+			return true;
+		}
+
+		char[] testArr = StringUtils.getEscapedCharacterArray(((Magic)magic).getTest(), false);
+		byte[] found = (byte[])dataAtOffset;
+		for( int i = 0; i < testArr.length; i++ ) {
+			if(i >= found.length || testArr[i] != (char)found[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
+	
+	@Override
+	public String formatString(Magic m, String out, Object val2) {
+		String s = new String((byte[])val2);
+		return String.format(out, s);
+	}
+
 }
