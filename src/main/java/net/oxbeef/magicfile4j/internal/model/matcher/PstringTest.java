@@ -28,7 +28,7 @@ public class PstringTest extends StringTest {
 	private static final String PSTRING_l = "pstring/l";
 	
 	
-	public byte[] getValue(TestableNode magic, byte[] ba) {
+	public Object getValue(TestableNode magic, byte[] ba) {
 		int o = magic.resolveOffset(ba);
 		if( o < ba.length) {
 			int sizeLength = 1;

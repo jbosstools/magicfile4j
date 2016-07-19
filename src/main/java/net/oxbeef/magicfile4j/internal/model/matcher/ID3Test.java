@@ -25,9 +25,9 @@ public class ID3Test extends NumericTest {
 	public ID3Test(Endian order) {
 		super(4, order);
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+	public Object getValue(TestableNode magic, byte[] bytearray) {
 		// Let superclass designate, then just apply mask
-		byte[] found = super.getValue(magic, bytearray);
+		byte[] found = (byte[])super.getValue(magic, bytearray);
 		for( int i = 0; i < found.length; i++ ) {
 			found[i] = (byte)(found[i] & 0x7F);
 		}

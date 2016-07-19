@@ -20,7 +20,7 @@ import net.oxbeef.magicfile4j.internal.model.TestableNode;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
 public class StringTest extends Tester {
-	public byte[] getValue(TestableNode magic, byte[] ba) {
+	public Object getValue(TestableNode magic, byte[] ba) {
 		int o = magic.resolveOffset(ba);
 		char[] test = StringUtils.getEscapedCharacterArray(((Magic)magic).getTest(), false);
 		if( ba.length < (o + test.length)) {
@@ -31,7 +31,7 @@ public class StringTest extends Tester {
 		return ret;
 	}
 	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
 		String test = ((Magic)magic).getTest();
 		if(test == null || test.isEmpty()) {
 			return false; // this should never happen
@@ -40,7 +40,7 @@ public class StringTest extends Tester {
 			return true;
 		}
 		
-		return compare(test, dataAtOffset);
+		return compare(test, (byte[])dataAtOffset);
 	}
 	
 	protected boolean compare(String test, byte[] dataAtOffset) {
@@ -56,8 +56,8 @@ public class StringTest extends Tester {
 		return false;
 	}
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
-		String s = new String(val);
+	public String formatString(Magic m, String out, Object val) {
+		String s = new String((byte[])val);
 		return String.format(out, s);
 	}
 }

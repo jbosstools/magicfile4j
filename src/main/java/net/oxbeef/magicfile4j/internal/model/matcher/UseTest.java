@@ -22,14 +22,14 @@ public class UseTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return true;
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+	public Object getValue(TestableNode magic, byte[] bytearray) {
 		return new byte[0];
 	}
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
 		return true;
 	}
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
+	public String formatString(Magic m, String out, Object val) {
 		// TODO Auto-generated method stub
 		return null;
 	}

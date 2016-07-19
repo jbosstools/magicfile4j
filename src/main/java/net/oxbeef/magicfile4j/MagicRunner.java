@@ -75,7 +75,7 @@ public class MagicRunner {
 		}
 
 		// Tester found
-		byte[] result = tester.getValue(node, contents);
+		Object result = tester.getValue(node, contents);
 		if (result != null && tester.matches(node, contents, result)) {
 			if( node.hasOutput()) {
 				String nodeOutput = ((Magic)node).getOutput();
@@ -127,14 +127,14 @@ public class MagicRunner {
 			// TODO log?
 			return;
 		}
-		byte[] result = tester.getValue(node, contents);
-		if (result != null && tester.matches(node, contents, result)) {
+		Object dataAtOffset = tester.getValue(node, contents);
+		if (dataAtOffset != null && tester.matches(node, contents, dataAtOffset)) {
 			matchResult.addMatchedMimeType(node.getLevel(), node.getMimeType());
 			matchResult.addMatchingNode(node);
 			if( node.hasOutput()) {
 				String out = ((Magic)node).getOutput();
 				if( out != null && !out.isEmpty()) {
-					String toPrint = tester.formatString((Magic)node, out, result);
+					String toPrint = tester.formatString((Magic)node, out, dataAtOffset);
 					if( toPrint.startsWith("\\b")) {
 						toPrint = toPrint.substring(2);
 					} else {
@@ -148,24 +148,5 @@ public class MagicRunner {
 				fillResult(children[i], matchResult);
 			}
 		}
-	}
-	
-	private String formatString(Magic m, String out, byte[] val) {
-		if( StringUtils.isStringType(m.getType())) {
-			String s = new String(val);
-			return String.format(out, s);
-		}
-		ByteBuffer bb = ByteBuffer.wrap(val);
-		switch(val.length) {
-		case 1:
-			return String.format(out, bb.get());
-		case 2:
-			return String.format(out,  bb.getShort());
-		case 4: 
-			return String.format(out,  bb.getInt());
-		case 8: 
-			return String.format(out, bb.getDouble());
-		}
-		return out;
 	}
 }

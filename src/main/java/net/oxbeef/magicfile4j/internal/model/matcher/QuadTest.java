@@ -34,8 +34,8 @@ public class QuadTest extends NumericTest {
 	}
 	
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
-		ByteBuffer bb = ByteBuffer.wrap(val);
+	public String formatString(Magic m, String out, Object val) {
+		ByteBuffer bb = ByteBuffer.wrap((byte[])val);
 		return String.format(out, bb.getLong());
 	}
 

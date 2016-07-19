@@ -22,16 +22,16 @@ public class NameTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return true;
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+	public Object getValue(TestableNode magic, byte[] bytearray) {
 		return new byte[0];
 	}
 	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
+	public String formatString(Magic m, String out, Object val) {
 		return out;
 	}
 }

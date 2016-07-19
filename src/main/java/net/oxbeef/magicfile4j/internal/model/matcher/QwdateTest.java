@@ -30,16 +30,16 @@ public class QwdateTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return false;
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+	public Object getValue(TestableNode magic, byte[] bytearray) {
 		return null;
 	}
 	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
+	public String formatString(Magic m, String out, Object val) {
 		// TODO Auto-generated method stub
 		return null;
 	}

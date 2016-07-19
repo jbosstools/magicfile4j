@@ -31,7 +31,7 @@ public class String16Test extends StringTest {
 	}
 	
 	
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+	public Object getValue(TestableNode magic, byte[] bytearray) {
 		int o = magic.resolveOffset(bytearray);
 		int len = getLength(o, bytearray);
 		byte[] ret = new byte[len];
@@ -77,8 +77,8 @@ public class String16Test extends StringTest {
 	}
 	
 	@Override
-	public String formatString(Magic m, String out, byte[] val) {
-		String s = new String(toCharArr(val));
+	public String formatString(Magic m, String out, Object val) {
+		String s = new String(toCharArr((byte[])val));
 		return String.format(out, s);
 	}
 }

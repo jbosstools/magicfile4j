@@ -26,7 +26,7 @@ public abstract class Tester {
 	 * @param bytearray
 	 * @return
 	 */
-	public abstract byte[] getValue(TestableNode magic, byte[] bytearray);
+	public abstract Object getValue(TestableNode magic, byte[] bytearray);
 
 	
 	/**
@@ -36,7 +36,7 @@ public abstract class Tester {
 	 * @param val
 	 * @return
 	 */
-	public abstract String formatString(Magic m, String out, byte[] val);
+	public abstract String formatString(Magic m, String out, Object val);
 
 	
 	/**
@@ -49,7 +49,7 @@ public abstract class Tester {
 	 * @param dataAtOffset
 	 * @return
 	 */
-	public abstract boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset);
+	public abstract boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset);
 	
 	
 	

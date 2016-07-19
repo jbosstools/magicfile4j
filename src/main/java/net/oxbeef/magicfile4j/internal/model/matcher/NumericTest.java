@@ -93,7 +93,7 @@ public class NumericTest extends Tester {
 		return ret;
 	}
 	
-	public byte[] getValue(TestableNode magic, byte[] ba) {
+	public Object getValue(TestableNode magic, byte[] ba) {
 		int o = magic.resolveOffset(ba);
 		if( o + size > ba.length) {
 			// Cannot read 'size' bytes here
@@ -134,7 +134,7 @@ public class NumericTest extends Tester {
 	
 	
 	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
 		String test = ((Magic)magic).getTest();
 		if( test != null && !test.isEmpty()) {
 			
@@ -157,7 +157,7 @@ public class NumericTest extends Tester {
 			}
 			
 			boolean signed = isSigned(magic);
-			return matches(test, dataAtOffset, signed, op);
+			return matches(test, (byte[])dataAtOffset, signed, op);
 		}
 		return false;
 	}
@@ -197,7 +197,8 @@ public class NumericTest extends Tester {
 		return ret;
 	}
 	
-	public String formatString(Magic m, String out, byte[] val) {
+	public String formatString(Magic m, String out, Object val2) {
+		byte[] val = (byte[])val2;
 		ByteBuffer bb = ByteBuffer.wrap(val);
 		switch(val.length) {
 		case 1:
