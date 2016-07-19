@@ -331,6 +331,10 @@ public class StringUtils implements IDataTypes {
 			stringTypes.add( MAGIC_SEARCH);
 			//stringTypes.add( MAGIC_DER);
 		}
+		int slash = type.indexOf('/');
+		if( slash >= 0 ) {
+			type = type.substring(0, slash);
+		}
 		return stringTypes.contains(type);
 	}
 

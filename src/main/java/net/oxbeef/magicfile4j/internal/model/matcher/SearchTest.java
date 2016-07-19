@@ -15,25 +15,38 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
-import net.oxbeef.magicfile4j.internal.model.Magic;
-import net.oxbeef.magicfile4j.internal.model.TestableNode;
-
-public class SearchTest extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
-	}
-	public Object getValue(TestableNode magic, byte[] bytearray) {
+public class SearchTest extends StringTest {
+	
+	protected String getMatchedOutput(char[] test, byte[] bytes, StringTestValue dataAtOffset) {
+		String flags = dataAtOffset.flags;
+		String[] arr = flags.split("/");
+		int numSpots = -1;
+		for( int i = 0; i < arr.length && numSpots < 0; i++ ) {
+			if( allDigits(arr[i])) {
+				numSpots = Integer.parseInt(arr[i]);
+			}
+		}
+		if( numSpots < 0 ) {
+			return null; // We can't search forever
+		}
+		String r = null;
+		for( int i = 0; i < numSpots; i++ ) {
+			r = super.getMatchedOutput(test, bytes, dataAtOffset);
+			dataAtOffset.offset++;
+			if( r != null )
+				return r;
+		}
 		return null;
 	}
-	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public String formatString(Magic m, String out, Object val) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private boolean allDigits(String s) {
+		if( s.isEmpty())
+			return false;
+		for( int i = 0; i < s.length(); i++ ) {
+			if( !Character.isDigit(s.charAt(i)))
+				return false;
+		}
+		return true;
 	}
 
 }
