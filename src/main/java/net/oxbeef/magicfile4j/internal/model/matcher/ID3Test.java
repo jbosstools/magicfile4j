@@ -15,25 +15,22 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
-import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class searchTest extends Tester {
-	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
+/**
+ * A four-byte integer value where the high bit of each byte is ignored.
+ */
+public class ID3Test extends NumericTest {
+	public ID3Test(Endian order) {
+		super(4, order);
 	}
 	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
+		// Let superclass designate, then just apply mask
+		byte[] found = super.getValue(magic, bytearray);
+		for( int i = 0; i < found.length; i++ ) {
+			found[i] = (byte)(found[i] & 0x7F);
+		}
+		return found;
 	}
-	@Override
-	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public String formatString(Magic m, String out, byte[] val) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -18,21 +18,20 @@ package net.oxbeef.magicfile4j.internal.model.matcher;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class indirectTest extends Tester {
+public class UseTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
-		return false;
+		return true;
 	}
 	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		return null;
+		return new byte[0];
 	}
-	@Override
 	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public String formatString(Magic m, String out, byte[] val) {
-		return out;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

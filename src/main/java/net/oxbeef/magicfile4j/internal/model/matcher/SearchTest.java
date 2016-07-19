@@ -15,25 +15,25 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
-import java.nio.ByteBuffer;
-
-import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class byteTest extends NumericTest {
-	public byteTest() {
-		super(1, Endian.BIG);
+public class SearchTest extends Tester {
+	public boolean matches(TestableNode magic, byte[] bytearray) {
+		return false;
 	}
-	protected long compare(long l, long l2, boolean signed) {
-		if( !signed) { 
-			return super.compare(l, l2, signed);
-		}
-		return (long)((byte)l - (byte)l2);
+	public byte[] getValue(TestableNode magic, byte[] bytearray) {
+		return null;
+	}
+	@Override
+	public boolean matches(TestableNode magic, byte[] byteArray, byte[] dataAtOffset) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public String formatString(Magic m, String out, byte[] val) {
-		ByteBuffer bb = ByteBuffer.wrap(val);
-		return String.format(out, bb.get());
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

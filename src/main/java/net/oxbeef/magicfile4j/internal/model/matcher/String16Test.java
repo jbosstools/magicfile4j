@@ -24,9 +24,9 @@ import net.oxbeef.magicfile4j.internal.offset.StringUtils;
  * A two byte string in unicode  - UCS16  
  * We'll return the data raw,  and let our matches method reverse it
  */
-public class string16Test extends stringTest {
+public class String16Test extends StringTest {
 	private Endian endian;
-	public string16Test(Endian endian) {
+	public String16Test(Endian endian) {
 		this.endian = endian;
 	}
 	

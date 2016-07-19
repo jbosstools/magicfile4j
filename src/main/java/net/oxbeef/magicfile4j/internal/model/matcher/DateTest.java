@@ -16,27 +16,45 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
+import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class quadTest extends NumericTest {
-	public quadTest(Endian bo) {
-		super(8,bo);
-	}
+public class DateTest extends NumericTest {
 	
-	protected long compare(long foundVal, long testVal, boolean signed) {
-		if( signed ) {
-			return foundVal == testVal ? 0 : foundVal > testVal ? 1 : -1; 
-		}
-		// we have 8 bytes
-		return foundVal - testVal;
+	public static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
+	
+	private TimeZone zone;
+	public DateTest(int size, Endian endian, TimeZone zone) {
+		super(size, endian);
+		this.zone = zone;
+	}
+
+	protected boolean isSigned(TestableNode magic) {
+		return false;
 	}
 	
 	@Override
 	public String formatString(Magic m, String out, byte[] val) {
 		ByteBuffer bb = ByteBuffer.wrap(val);
-		return String.format(out, bb.getLong());
+		long l = -1;
+		switch(size) {
+		case 4:
+			l = bb.getInt();
+			break;
+		case 8:
+			l = bb.getLong();
+			break;
+		}
+		Date date = new Date(l);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+		if( zone != null )
+			format.setTimeZone(zone);
+		String asStr = format.format(date);
+		return String.format(out, asStr);
 	}
-
 }

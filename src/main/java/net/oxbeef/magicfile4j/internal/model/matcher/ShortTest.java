@@ -16,21 +16,18 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import net.oxbeef.magicfile4j.internal.endian.Endian;
-import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-/**
- * A four-byte integer value where the high bit of each byte is ignored.
- */
-public class id3Test extends NumericTest {
-	public id3Test(Endian order) {
-		super(4, order);
+public class ShortTest extends NumericTest {
+	public ShortTest(Endian endian){
+		super(2, endian);
 	}
-	public byte[] getValue(TestableNode magic, byte[] bytearray) {
-		// Let superclass designate, then just apply mask
-		byte[] found = super.getValue(magic, bytearray);
-		for( int i = 0; i < found.length; i++ ) {
-			found[i] = (byte)(found[i] & 0x7F);
+
+	protected long compare(long l, long l2, boolean signed) {
+		if( !signed) {
+			return super.compare(l, l2, signed);
 		}
-		return found;
+
+		long poo = (long)((short)l - (short)l2);
+		return poo;
 	}
 }

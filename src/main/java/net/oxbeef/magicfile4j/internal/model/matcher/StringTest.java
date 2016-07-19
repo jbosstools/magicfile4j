@@ -19,7 +19,7 @@ import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 import net.oxbeef.magicfile4j.internal.offset.StringUtils;
 
-public class stringTest extends Tester {
+public class StringTest extends Tester {
 	public byte[] getValue(TestableNode magic, byte[] ba) {
 		int o = magic.resolveOffset(ba);
 		char[] test = StringUtils.getEscapedCharacterArray(((Magic)magic).getTest(), false);

@@ -15,19 +15,28 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import java.nio.ByteBuffer;
+
 import net.oxbeef.magicfile4j.internal.endian.Endian;
+import net.oxbeef.magicfile4j.internal.model.Magic;
 
-public class shortTest extends NumericTest {
-	public shortTest(Endian endian){
-		super(2, endian);
+public class QuadTest extends NumericTest {
+	public QuadTest(Endian bo) {
+		super(8,bo);
 	}
-
-	protected long compare(long l, long l2, boolean signed) {
-		if( !signed) {
-			return super.compare(l, l2, signed);
+	
+	protected long compare(long foundVal, long testVal, boolean signed) {
+		if( signed ) {
+			return foundVal == testVal ? 0 : foundVal > testVal ? 1 : -1; 
 		}
-
-		long poo = (long)((short)l - (short)l2);
-		return poo;
+		// we have 8 bytes
+		return foundVal - testVal;
 	}
+	
+	@Override
+	public String formatString(Magic m, String out, byte[] val) {
+		ByteBuffer bb = ByteBuffer.wrap(val);
+		return String.format(out, bb.getLong());
+	}
+
 }

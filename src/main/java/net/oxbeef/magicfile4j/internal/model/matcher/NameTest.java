@@ -18,7 +18,7 @@ package net.oxbeef.magicfile4j.internal.model.matcher;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class nameTest extends Tester {
+public class NameTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return true;
 	}

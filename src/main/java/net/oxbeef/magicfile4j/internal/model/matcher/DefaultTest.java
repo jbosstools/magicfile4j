@@ -18,7 +18,7 @@ package net.oxbeef.magicfile4j.internal.model.matcher;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class regexTest extends Tester {
+public class DefaultTest extends Tester {
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return false;
 	}
@@ -32,7 +32,7 @@ public class regexTest extends Tester {
 	}
 	@Override
 	public String formatString(Magic m, String out, byte[] val) {
-		// TODO Auto-generated method stub
-		return null;
+		return out;
 	}
+
 }

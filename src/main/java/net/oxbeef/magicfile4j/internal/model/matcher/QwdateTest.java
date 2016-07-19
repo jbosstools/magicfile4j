@@ -15,10 +15,18 @@
  */
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
+import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class clearTest extends Tester {
+public class QwdateTest extends Tester {
+	private Endian endian;
+	public QwdateTest(Endian e) {
+		this.endian = e;
+	}
+	
+	// TODO , no idea how to read this date type
+	
 	public boolean matches(TestableNode magic, byte[] bytearray) {
 		return false;
 	}
@@ -32,6 +40,7 @@ public class clearTest extends Tester {
 	}
 	@Override
 	public String formatString(Magic m, String out, byte[] val) {
-		return out;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -16,20 +16,19 @@
 package net.oxbeef.magicfile4j.internal.model.matcher;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 import net.oxbeef.magicfile4j.internal.endian.Endian;
 import net.oxbeef.magicfile4j.internal.model.Magic;
 
-public class doubleTest extends NumericTest {
+public class FloatTest extends NumericTest {
 
-	public doubleTest(Endian endian) {
+	public FloatTest(Endian endian) {
 		super(8, endian);
 	}
 
 	protected boolean matches(String test, byte[] dataAtOffset, boolean signed, char op) {
-		double testVal = Double.parseDouble(test);
-		double foundVal = ByteBuffer.wrap(dataAtOffset).getDouble();
+		float testVal = Float.parseFloat(test);
+		float foundVal = ByteBuffer.wrap(dataAtOffset).getFloat();
 					
 		switch(op) {
 		case '<':
@@ -63,9 +62,9 @@ public class doubleTest extends NumericTest {
 		}
 		return false;
 	}
+	
 	public String formatString(Magic m, String out, byte[] val) {
 		ByteBuffer bb = ByteBuffer.wrap(val);
-		return String.format(out, bb.getDouble());
+		return String.format(out, bb.getFloat());
 	}
-
 }

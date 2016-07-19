@@ -19,7 +19,7 @@ import java.nio.ByteOrder;
 
 import net.oxbeef.magicfile4j.internal.model.TestableNode;
 
-public class pstringTest extends stringTest {
+public class PstringTest extends StringTest {
 	
 	private static final String PSTRING_B = "pstring/B";
 	private static final String PSTRING_H = "pstring/H";
