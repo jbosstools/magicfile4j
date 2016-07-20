@@ -16,7 +16,7 @@
 package org.jboss.tools.magicfile4j;
 
 
-import java.nio.ByteBuffer;
+import java.io.File;
 
 import org.jboss.tools.magicfile4j.internal.model.DataTypeMatcherMap;
 import org.jboss.tools.magicfile4j.internal.model.Magic;
@@ -25,19 +25,23 @@ import org.jboss.tools.magicfile4j.internal.model.MagicNode;
 import org.jboss.tools.magicfile4j.internal.model.NameNode;
 import org.jboss.tools.magicfile4j.internal.model.TestableNode;
 import org.jboss.tools.magicfile4j.internal.model.matcher.Tester;
-import org.jboss.tools.magicfile4j.internal.offset.StringUtils;
 
 public class MagicRunner {
 
-	private String filename;
-	private byte[] contents;
-	public MagicRunner(String filename, byte[] contents) {
-		this.filename = filename;
-		this.contents = contents;
+	private MagicFileModel model;
+	public MagicRunner(IMagicFileModel model) {
+		this.model = (MagicFileModel)model;
 	}
-	
-	public MagicResult runMatcher(IMagicFileModel model2) {
-		MagicFileModel model = (MagicFileModel)model2;
+
+	public MagicResult runMatcher(File toTest) {
+		return runMatcherInternal(null, null); // TODO
+	}
+
+	public MagicResult runMatcher(String label, byte[] contents) {
+		return runMatcherInternal(contents, label); 
+	}
+
+	private MagicResult runMatcherInternal(byte[] contents, String label) {
 		// should sort top level nodes, but not during testing
 		MagicNode[] magics = model.getSortedChildren(); 
 												
@@ -46,10 +50,10 @@ public class MagicRunner {
 			// If we're a named node, we shouldn't be eligible as a top-level result???
 			// This is when comparing my results to those of linux 'file' 
 			if( !(m instanceof NameNode)) {
-				MagicNode matched = findFirstMatchingDescriptionNode(m);
+				MagicNode matched = findFirstMatchingDescriptionNode(m, contents);
 				if (matched != null) {
 					// Now we should traverse it to accumulate output, etc
-					return handleWinner(matched);
+					return handleWinner(matched, label, contents);
 				}
 			}
 		}
@@ -63,7 +67,7 @@ public class MagicRunner {
 	 * @param contents
 	 * @return
 	 */
-	protected TestableNode findFirstMatchingDescriptionNode(MagicNode mn) {
+	protected TestableNode findFirstMatchingDescriptionNode(MagicNode mn, byte[] contents) {
 		TestableNode node = null;
 		if( mn instanceof TestableNode) {
 			node = (TestableNode)mn;
@@ -89,7 +93,7 @@ public class MagicRunner {
 			MagicNode[] magics = node.getChildren(); 
 			for (int i = 0; i < magics.length; i++) {
 				MagicNode child = magics[i];
-				TestableNode matchedChild = findFirstMatchingDescriptionNode(child ); 
+				TestableNode matchedChild = findFirstMatchingDescriptionNode(child, contents); 
 				if (matchedChild != null) {
 					return matchedChild;
 				}
@@ -99,10 +103,10 @@ public class MagicRunner {
 		return null;
 	}
 
-	private MagicResult handleWinner(MagicNode m) {
+	private MagicResult handleWinner(MagicNode m, String label, byte[] contents) {
 		MagicResult result = new MagicResult(m);
-		result.appendOutput(filename + ":");
-		fillResult(m, result);
+		result.appendOutput(label + ":");
+		fillResult(m, result, contents);
 		return result;
 	}
 	
@@ -116,7 +120,7 @@ public class MagicRunner {
 		return tester;
 	}
 	
-	private void fillResult(MagicNode node2, MagicResult matchResult) {
+	private void fillResult(MagicNode node2, MagicResult matchResult, byte[] contents) {
 		TestableNode node = null;
 		if( node2 instanceof TestableNode) {
 			node = (TestableNode)node2;
@@ -145,7 +149,7 @@ public class MagicRunner {
 			}
 			MagicNode[] children = node.getChildren();
 			for( int i = 0; i < children.length; i++ ) {
-				fillResult(children[i], matchResult);
+				fillResult(children[i], matchResult, contents);
 			}
 		}
 	}

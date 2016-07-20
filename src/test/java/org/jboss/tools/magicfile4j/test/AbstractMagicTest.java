@@ -33,8 +33,8 @@ public abstract class AbstractMagicTest extends TestCase {
 		IMagicFileModel mfm = new MagicFileLoader().readMagicFile(
 				new ByteArrayInputStream(magicFileContents.getBytes()));
 		MagicRunner mrunner = null;
-		mrunner = new MagicRunner("Test", fileToTest);
-		MagicResult mr = mrunner.runMatcher(mfm);
+		mrunner = new MagicRunner(mfm);
+		MagicResult mr = mrunner.runMatcher("Test", fileToTest);
 		String out = mr.getOutput();
 		assertEquals(expectedResult, out);
 	}
@@ -43,9 +43,8 @@ public abstract class AbstractMagicTest extends TestCase {
 			String magicFileContents, byte[] fileToTest) throws IOException {
 		IMagicFileModel mfm = new MagicFileLoader().readMagicFile(
 				new ByteArrayInputStream(magicFileContents.getBytes()));
-		MagicRunner mrunner = null;
-		mrunner = new MagicRunner("Test", fileToTest);
-		MagicResult mr = mrunner.runMatcher(mfm);
+		MagicRunner mrunner = new MagicRunner(mfm);
+		MagicResult mr = mrunner.runMatcher("Test", fileToTest);
 		assertNull(mr);
 	}
 }
