@@ -31,6 +31,8 @@ public class StringTest extends Tester {
 	}
 	
 	public Object getValue(TestableNode magic, byte[] ba) {
+		try {
+		
 		int o = magic.resolveOffset(ba);
 		char[] test = StringUtils.getEscapedCharacterArray(((Magic)magic).getTest(), false);
 		StringTestValue ret = new StringTestValue();
@@ -46,6 +48,10 @@ public class StringTest extends Tester {
 			return null; 
 		}
 		return ret;
+		} catch(Exception e ) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	@Override
 	public boolean matches(TestableNode magic, byte[] byteArray, Object dataAtOffset) {

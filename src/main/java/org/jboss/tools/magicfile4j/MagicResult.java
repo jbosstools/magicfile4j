@@ -32,6 +32,7 @@ public class MagicResult {
 		allMatching = new ArrayList<MagicNode>();
 		fullDescription = new StringBuffer();
 	}
+	
 	public void addMatchingNode(MagicNode node) {
 		allMatching.add(node);
 	}

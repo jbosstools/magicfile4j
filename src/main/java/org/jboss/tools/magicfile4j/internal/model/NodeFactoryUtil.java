@@ -40,8 +40,13 @@ public class NodeFactoryUtil {
 			
 			if (StringUtils.isStringType(type)) {
 				int space = StringUtils.findFirstUnescapedSpace(remainder);
-				comparison = remainder.substring(0, space);
-				description = comparison.length() >= remainder.length() ? null : remainder.substring(space).trim();
+				if( space == -1 ) {
+					comparison = remainder;
+					description = "";
+				} else {
+					comparison = remainder.substring(0, space);
+					description = comparison.length() >= remainder.length() ? null : remainder.substring(space).trim();
+				}
 			} else { // if( isFloatType(type) || isDoubleType(type) || isLongType(type)) {
 				comparison = remainder.trim().split("\\s+")[0];
 				remainder = remainder.trim().substring(comparison.length());

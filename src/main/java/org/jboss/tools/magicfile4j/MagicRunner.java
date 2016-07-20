@@ -16,7 +16,11 @@
 package org.jboss.tools.magicfile4j;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.jboss.tools.magicfile4j.internal.model.DataTypeMatcherMap;
 import org.jboss.tools.magicfile4j.internal.model.Magic;
@@ -33,10 +37,46 @@ public class MagicRunner {
 		this.model = (MagicFileModel)model;
 	}
 
-	public MagicResult runMatcher(File toTest) {
-		return runMatcherInternal(null, null); // TODO
+	public MagicResult runMatcher(File toTest) throws IOException {
+		return runMatcher(toTest, 16383);
+	} 
+	
+	public MagicResult runMatcher(File toTest, int maxSize) throws IOException {
+		byte[] bytes = read(toTest, 16383 );
+		return runMatcherInternal(bytes, toTest.getName()); // TODO
 	}
 
+	
+	private byte[] read(File file, int maxBytes) throws IOException {
+		int bytesRead = 0;
+	    ByteArrayOutputStream ous = null;
+	    InputStream ios = null;
+	    try {
+	        byte[] buffer = new byte[4096];
+	        ous = new ByteArrayOutputStream();
+	        ios = new FileInputStream(file);
+	        int read = 0;
+	        while (((bytesRead < maxBytes) && ((read = ios.read(buffer))) != -1)) {
+	        	bytesRead += 4096;
+	            ous.write(buffer, 0, read);
+	        }
+	    }finally {
+	        try {
+	            if (ous != null)
+	                ous.close();
+	        } catch (IOException e) {
+	        }
+
+	        try {
+	            if (ios != null)
+	                ios.close();
+	        } catch (IOException e) {
+	        }
+	    }
+	    return ous.toByteArray();
+	}
+	
+	
 	public MagicResult runMatcher(String label, byte[] contents) {
 		return runMatcherInternal(contents, label); 
 	}

@@ -142,16 +142,22 @@ public class StringUtils implements IDataTypes {
 	 */
 	public static int findFirstUnescapedSpace(String line) {
 		int ind = 0;
+		boolean spaceFound = false;
 		while (ind < line.length()) {
 			char c = line.charAt(ind++); // c is char at index, THEN index
 											// incremented
 			if (isspace(c)) {
+				spaceFound = true;
 				break; // loop over, found the space
 			}
 			if (c == '\\') {
 				ind++;
 			}
 		}
+		// No unescaped space found
+		if( !spaceFound ) 
+			return -1;
+		
 		ind--;
 		return ind;
 	}
