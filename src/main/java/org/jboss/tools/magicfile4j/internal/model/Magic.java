@@ -1,5 +1,5 @@
 /*
- * Copyright Rob Stryker and Contributors (as per source history)
+ * Copyright (c) 2016 Red Hat, Inc., Rob Stryker, and Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
