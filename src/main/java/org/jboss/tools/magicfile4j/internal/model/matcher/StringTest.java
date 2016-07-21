@@ -84,7 +84,8 @@ public class StringTest extends Tester {
 				return null; // premature end without full match
 			}
 
-			
+			byte b1 = bytes[dataOffset];
+			byte b2 = (byte)test[testOffset];
 			char fromData = (char)bytes[dataOffset++];
 			char fromMagic = test[testOffset];
 			
@@ -99,7 +100,7 @@ public class StringTest extends Tester {
 				sb.append(fromData);
 				testOffset += (magicConsec-1);
 				dataOffset += (dataConsec-1);
-			} else if(fromMagic == fromData) {
+			} else if((byte)fromMagic == (byte)fromData) {
 				sb.append(fromData);
 			} else if( Character.isUpperCase(fromMagic) && upperTestMatchesAll
 					&& Character.toLowerCase(fromMagic) == fromData) {
