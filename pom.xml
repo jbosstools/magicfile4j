@@ -14,7 +14,7 @@
   <groupId>org.jboss.tools</groupId>
   <artifactId>magicfile4j</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0-Beta1</version>
   <name>magicfile4j</name>
   <url>https://github.com/robstryker/magicfile4j/</url>
   <dependencies>
