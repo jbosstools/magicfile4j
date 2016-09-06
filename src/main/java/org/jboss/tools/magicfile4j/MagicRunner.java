@@ -43,7 +43,7 @@ public class MagicRunner {
 	
 	public MagicResult runMatcher(File toTest, int maxSize) throws IOException {
 		byte[] bytes = read(toTest, 16383 );
-		return runMatcherInternal(bytes, toTest.getName()); // TODO
+		return runMatcherInternal(bytes, toTest.getName());
 	}
 
 	

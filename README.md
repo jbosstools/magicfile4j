@@ -20,6 +20,14 @@ A java implementation of the linux 'magic file' reader, which backs the linux 'f
 - quad, bequad, lequad
 - string  (Partially complete, does not respect flags!)
 - pstring 
+- date, bedate, ledate
+- qdate, beqdate, leqdate
+- ldate, beldate, leldate
+- qldate, beqldate, leqldate
+- leid3, beid3
+- bestring16, lestring16
+- melong, medate, meldate
+- indirect, regex, search, default, clear
 
 #### Data Type Masks 
 The '&' mask is currently supported and functional. ex:  belong&0xFFFF
@@ -31,15 +39,7 @@ The '&' mask is currently supported and functional. ex:  belong&0xFFFF
 
 ## What doesn't work yet / stubbed out / to be fixed
 ### Data types
-- date, bedate, ledate
-- qdate, beqdate, leqdate
-- ldate, beldate, leldate
-- qldate, beqldate, leqldate
 - qwdate, beqwdate, leqwdate
-- leid3, beid3
-- bestring16, lestring16
-- melong, medate, meldate
-- indirect, regex, search, default, clear
 
 ### General code cleanup
 The code could be refined, with more attention paid to error handling. Right now there's a lot of silently ignoring problems and indicating that no match is found.  
